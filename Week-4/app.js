@@ -1,6 +1,6 @@
 document.getElementById('btn').addEventListener('click', function() {
     let city = document.getElementById('city-info').value;
-    let apiKey = 'ea727c3991bc61421571f2e128e8bf98';
+    let apiKey = 'ea727c3991bc61421571f2e128e8bf98'; 
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     fetch(url)
@@ -14,11 +14,24 @@ document.getElementById('btn').addEventListener('click', function() {
         let weather = data.weather[0].description;
         let temp = data.main.temp;
         let windSpeed = data.wind.speed;
-        document.getElementById('weather-info').innerHTML = `
-            <p>Weather Description: ${weather}</p>
-            <p>Temperature: ${temp} °C</p>
-            <p>Wind Speed: ${windSpeed} m/s</p>
+
+        // Create a new div element for the weather information
+        let newWeatherDiv = document.createElement('div');
+        newWeatherDiv.classList.add('weather-entry'); // Add a class for CSS
+
+        // Set the innerHTML of the new div
+        newWeatherDiv.innerHTML = `
+            <p>The weather in ${city} is ${weather}.</p>
+            <p>The temperature is ${temp} °C with a wind speed of ${windSpeed}m/s.</p>
         `;
+
+        let weatherInfoContainer = document.getElementById('weather-info');
+
+        // Insert the new div before the first child of weather-info
+        weatherInfoContainer.insertBefore(newWeatherDiv, weatherInfoContainer.firstChild);
+
+        // Clear the city input text box
+        document.getElementById('city-info').value = '';
     })
     .catch(error => {
         console.log(error);
