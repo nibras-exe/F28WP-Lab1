@@ -1,5 +1,5 @@
 document.getElementById('btn').addEventListener('click', function() {
-    let city = document.getElementById('cityInput').value;
+    let city = document.getElementById('city-info').value;
     let apiKey = 'ea727c3991bc61421571f2e128e8bf98';
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
